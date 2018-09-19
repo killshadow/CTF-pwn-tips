@@ -1,23 +1,38 @@
 CTF-pwn-tips
 ===========================
 
+## Table of Contents
 
-# Catalog
-* [Overflow](#overflow)
-* [Find string in gdb](#find-string-in-gdb)
-* [Binary Service](#binary-service)
-* [Find specific function offset in libc](#find-specific-function-offset-in-libc)
-* [Find '/bin/sh' or 'sh' in library](#find-binsh-or-sh-in-library)
-* [Leak stack address](#leak-stack-address)
-* [Fork problem in gdb](#fork-problem-in-gdb)
-* [Secret of a mysterious section - .tls](#secret-of-a-mysterious-section---tls)
-* [Predictable RNG(Random Number Generator)](#predictable-rngrandom-number-generator)
-* [Make stack executable](#make-stack-executable)
-* [Use one-gadget-RCE instead of system](#use-one-gadget-rce-instead-of-system)
-* [Hijack hook function](#hijack-hook-function)
-* [Use printf to trigger malloc and free](#use-printf-to-trigger-malloc-and-free)
-* [Use execveat to open a shell](#use-execveat-to-open-a-shell)
-
+   * [CTF-pwn-tips](#ctf-pwn-tips)
+   * [Catalog](#catalog)
+      * [Overflow](#overflow)
+         * [scanf](#scanf)
+         * [gets](#gets)
+         * [read](#read)
+         * [strcpy](#strcpy)
+         * [strcat](#strcat)
+      * [Find string in gdb](#find-string-in-gdb)
+         * [gdb](#gdb)
+         * [<a href="https://github.com/longld/peda">gdb peda</a>](#gdb-peda)
+      * [Binary Service](#binary-service)
+         * [① ncat command](#-ncat-command)
+         * [② socat command](#-socat-command)
+      * [Find specific function offset in libc](#find-specific-function-offset-in-libc)
+         * [Manually](#manually)
+         * [Automatically](#automatically)
+      * [Find '/bin/sh' or 'sh' in library](#find-binsh-or-sh-in-library)
+         * [Manually](#manually-1)
+         * [Automatically](#automatically-1)
+      * [Leak stack address](#leak-stack-address)
+      * [Fork problem in gdb](#fork-problem-in-gdb)
+      * [Secret of a mysterious section - .tls](#secret-of-a-mysterious-section---tls)
+      * [Predictable RNG(Random Number Generator)](#predictable-rngrandom-number-generator)
+      * [Make stack executable](#make-stack-executable)
+      * [Use one-gadget-RCE instead of system](#use-one-gadget-rce-instead-of-system)
+      * [Hijack hook function](#hijack-hook-function)
+      * [Use printf to trigger malloc and free](#use-printf-to-trigger-malloc-and-free)
+         * [conclusion](#conclusion)
+      * [Use execveat to open a shell](#use-execveat-to-open-a-shell)
 
 ## Overflow
 
@@ -174,14 +189,14 @@ Normal:
 Advanced:
 
 ```bash
-setsid socat tcp4-listen:[port],address,fork exec:[comd]
-# such as
-
+➜  ~ setsid socat tcp-l:9999,reuseaddress,fork exec:./auth_record
+# setsid: in order to keep open 9999 in linux, even though bash or ssh disconnect
+# tcp-l: it means listen this port through tcp(include IPv4 IPv6), "l" means "listen"
+# 9999: it's port
+# fork: means socat fork a process and run "auth_record"
+# reuseaddre: in order keep connect when break this progress
+# cmd: "cmd" replace by you want to execute command 
 ```
-
-
-
-
 
 ## Find specific function offset in libc
 
