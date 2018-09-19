@@ -1,10 +1,10 @@
 CTF-pwn-tips
 ===========================
 
-## Table of Contents
+## Contents
 
-   * [CTF-pwn-tips](#ctf-pwn-tips)
-   * [Catalog](#catalog)
+
+* [CTF-pwn-tips](#ctf-pwn-tips)
       * [Overflow](#overflow)
          * [scanf](#scanf)
          * [gets](#gets)
