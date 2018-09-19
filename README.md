@@ -152,6 +152,8 @@ Found 2 results, display max 2 items:
 
 ## Binary Service
 
+### ① ncat command
+
 Normal:
 
 * `ncat -vc ./binary -kl 127.0.0.1 $port`
@@ -162,6 +164,24 @@ With specific library in two ways:
 * `ncat -vc 'LD_LIBRARY_PATH=/path/of/libc.so ./binary' -kl 127.0.0.1 $port`
 
 After this, you can connect to binary service by command `nc localhost $port`.
+
+### ② socat command
+
+Normal:
+
+- `socat tcp-l:12345,fork exec:./pwn`
+
+Advanced:
+
+```bash
+setsid socat tcp4-listen:[port],address,fork exec:[comd]
+# such as
+
+```
+
+
+
+
 
 ## Find specific function offset in libc
 
