@@ -189,7 +189,7 @@ Normal:
 Advanced:
 
 ```bash
-➜  ~ setsid socat tcp-l:9999,reuseaddress,fork exec:./auth_record
+➜  ~ setsid socat tcp-l:9999,reuseaddr,fork exec:./auth_record
 # setsid: in order to keep open 9999 in linux, even though bash or ssh disconnect
 # tcp-l: it means listen this port through tcp(include IPv4 IPv6), "l" means "listen"
 # 9999: it's port
