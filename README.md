@@ -1,9 +1,6 @@
 CTF-pwn-tips
 ===========================
 
-Table of Contents
-=================
-
    * [CTF-pwn-tips](#ctf-pwn-tips)
       * [Overflow](#overflow)
          * [scanf](#scanf)
