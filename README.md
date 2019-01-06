@@ -33,6 +33,7 @@ Table of Contents
       * [Use printf to trigger malloc and free](#use-printf-to-trigger-malloc-and-free)
          * [conclusion](#conclusion)
       * [Use execveat to open a shell](#use-execveat-to-open-a-shell)
+      * [Compile a program](#Compile-a-program)
 
 ## Overflow
 
@@ -516,3 +517,9 @@ According to its [man page](http://man7.org/linux/man-pages/man2/execveat.2.html
 > If pathname is absolute, then dirfd is ignored.
 
 Hence, if we make `pathname` point to `"/bin/sh"`, and set `argv`, `envp` and `flags` to 0, we can still get a shell whatever the value of `dirfd`.
+
+## Compile a program
+
+```bash
+gcc -z execstack -fno-stack-protector -fno-pie helloworld.c -o helloworld
+```
