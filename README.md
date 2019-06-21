@@ -518,7 +518,7 @@ Hence, if we make `pathname` point to `"/bin/sh"`, and set `argv`, `envp` and `f
 
 ## Compile a program
 
-When you compile c file using gcc in 64bit system, maybe you will get an error which:
+When you compile c file to generate 32bit file using gcc in 64bit system, maybe you will get an error which:
 ```bash
 fatal error: sys/cdefs.h: No such file or directory
 ```
