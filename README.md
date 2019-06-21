@@ -31,6 +31,7 @@ CTF-pwn-tips
          * [conclusion](#conclusion)
       * [Use execveat to open a shell](#use-execveat-to-open-a-shell)
       * [Compile a program](#Compile-a-program)
+      * [Search libc version](#Search libc version)
 
 ## Overflow
 
@@ -529,6 +530,7 @@ sudo apt install libc6-dev-i386
 ```bash
 gcc -z execstack -fno-stack-protector -fno-pie helloworld.c -o helloworld
 ```
+
 ## Search libc version
 
 ```bash
