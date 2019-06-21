@@ -517,6 +517,24 @@ Hence, if we make `pathname` point to `"/bin/sh"`, and set `argv`, `envp` and `f
 
 ## Compile a program
 
+When you compile c file using gcc in 64bit system, maybe you will get an error which:
+```bash
+fatal error: sys/cdefs.h: No such file or directory
+```
+It means you need to install libc library for 32bit compiler. So you can use follow command to fix this problem.
+```bash
+sudo apt install libc6-dev-i386
+```
+
 ```bash
 gcc -z execstack -fno-stack-protector -fno-pie helloworld.c -o helloworld
+```
+## Search libc version
+
+```bash
+ldd --version
+getconf GNU_LIBC_VERSION
+ls -l /lib/x86_64-linux-gnu/libc.so.6
+ls -l /lib/i386-linux-gnu/libc.so.6
+apt-cache show libc6
 ```
