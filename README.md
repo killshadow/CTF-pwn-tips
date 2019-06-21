@@ -31,7 +31,7 @@ CTF-pwn-tips
          * [conclusion](#conclusion)
       * [Use execveat to open a shell](#use-execveat-to-open-a-shell)
       * [Compile a program](#Compile-a-program)
-      * [Search libc version](#Search libc version)
+      * [Search libc version](#Search-libc-version)
 
 ## Overflow
 
