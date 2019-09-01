@@ -540,3 +540,9 @@ ls -l /lib/x86_64-linux-gnu/libc.so.6
 ls -l /lib/i386-linux-gnu/libc.so.6
 apt-cache show libc6
 ```
+
+## Preload so file
+
+```bash
+LD_LIBRARY_PATH=$PWD LD_PRELOAD=./libmimalloc.so ./mi
+```
