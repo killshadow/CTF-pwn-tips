@@ -32,7 +32,7 @@ CTF-pwn-tips
       * [Use execveat to open a shell](#use-execveat-to-open-a-shell)
       * [Compile a program](#Compile-a-program)
       * [Search libc version](#Search-libc-version)
-      * [Preload so file](#Preload so file)
+      * [Preload so file](#Preload-so-file)
 
 ## Overflow
 
