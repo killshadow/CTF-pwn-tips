@@ -33,6 +33,7 @@ CTF-pwn-tips
       * [Compile a program](#Compile-a-program)
       * [Search libc version](#Search-libc-version)
       * [Preload so file](#Preload-so-file)
+      * [Test dlopen so file](#Test-dlopen-so-file)
 
 ## Overflow
 
@@ -546,4 +547,59 @@ apt-cache show libc6
 
 ```bash
 LD_LIBRARY_PATH=$PWD LD_PRELOAD=./libmimalloc.so ./mi
+```
+
+## Test dlopen so file
+
+From: https://stackoverflow.com/questions/40115688/are-static-c-objects-in-dynamically-loaded-libraries-initialized-before-dlopen
+
+`cat libtest.cpp`
+```cpp
+#include<iostream>
+using namespace std;
+
+namespace
+{
+    class Test
+    {
+    public:
+        Test()  { std::cerr << "In Test()...\n"; }
+        ~Test() { std::cerr << "In ~Test()...\n"; }
+    };
+
+    Test    test; // when is this initialized?
+}
+```
+
+`cat testso.cpp`
+```cpp
+#include<iostream>
+#include<dlfcn.h>
+using namespace std;
+int main( int ac, char* av[] )
+{
+    if ( ac < 2 )
+    {
+        std::cerr << "Usage: " << av[0] << "library-name\n";
+        return 1;
+    }
+    std::cerr << "Before dlopen()...\n";
+    dlerror();
+    void*    _handle(dlopen( av[1], RTLD_NOW ));
+    std::cerr << "After dlopen()...\n";
+    if ( !_handle )
+    {
+        std::cerr << "Error: " << dlerror() << ", exiting...\n";
+        return 2;
+    }
+    dlclose( _handle );
+    std::cerr << "After dlclose()...\n";
+    return 0;
+}
+```
+
+```bash
+g++ -o libtest.so -shared -fPIC libtest.cpp
+g++ testso.cpp -o testso -ldl
+./testso ./libtest.so
 ```
